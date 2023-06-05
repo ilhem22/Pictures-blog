@@ -1,0 +1,60 @@
+{% extends 'base.html'%}
+
+{% block title %} création de compte {% endblock  %}
+
+
+{% block content %}
+<style>
+    .my-class:required:invalid {
+    border-color: red;
+}
+.my-class:required:invalid + .fa {
+    display: inline-block;
+}
+ .fa {
+    display: none;
+    margin-left: 5px;
+ }
+</style>
+
+<div class="container">
+    <div class="col-md-12 mt-5">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger text-center">
+            <strong> {{message}} </strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <form action="" method="post" novalidate> {% csrf_token %}
+            <div class="card">
+                <div class="card-header text-center">
+                    <i class="fas fa-user-lock"></i> creation de compte 
+                </div>
+                <div class="card-body">
+                    <label > Nom utilisateur: </label>
+                    <br>
+                    {{form.username}}
+                    <br>
+                    <label > Mot de passe: </label>
+                    <br>
+                    {{form.pwd}}
+                    <br>
+                    <label > Mot de passe de confirmation: </label>
+                    <br>
+                    {{form.pwd_confirm}}
+
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary btn-block"> créer le compte </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

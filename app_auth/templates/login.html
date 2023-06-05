@@ -1,0 +1,85 @@
+{% extends 'base.html'%}
+
+{% block title %} connexion au blog {% endblock  %}
+
+
+{% block content %}
+<style>
+    .my-class:required:invalid {
+    border-color: red;
+}
+.my-class:required:invalid + .fa {
+    display: inline-block;
+}
+ .fa {
+    display: none;
+    margin-left: 5px;
+ }
+</style>
+
+<div class="container">
+    <div class="col-md-12 mt-5">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger text-center">
+            <strong> {{message}} </strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <form action="" method="post" novalidate> {% csrf_token %}
+            <div class="card">
+                <div class="card-header text-center">
+                    <i class="fas fa-user"></i> connexion au blog 
+                </div>
+                <div class="card-body">
+                    <label for="id_username" class="form-label">Nom utilisateur</label>
+                    {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                    <div>
+                        <span class="invalid-feedback" style="display: block;"> {{error}}</span>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <div>
+                        {{ form.username }}
+                        <i class="fa fa-exclamation-circle" aria-hidden="true" id="my-id-icon"></i>
+                    </div>
+                    <br>
+                    <label for="id_pwd">Mot de passe</label>
+                    {% if form.pwd.errors %}
+                    {% for error in form.pwd.errors %}
+                    <div>
+                        <small class="text-danger">{{error}}</small>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <div>
+                        {{ form.pwd }}
+                        <i class="fa fa-exclamation-circle" aria-hidden="true" id="my-id-icon"></i>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary btn-block"> Se connecter</button>
+                    <p class="mt-2"> vous n'avez pas de compte ? <a href="{% url 'register' %}"> créer le compte</a></p>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const formField = document.querySelector("#form.username"); // Replace "my_field" with the name of your form field
+  formField.addEventListener("input", () => {
+    const errorSpan = formField.parentElement.querySelector(".invalid-feedback");
+    if (formField.value) {
+      errorSpan.style.display = "none";
+    } else {
+      errorSpan.style.display = "block";
+    }
+  });
+</script>
+{% endblock %}

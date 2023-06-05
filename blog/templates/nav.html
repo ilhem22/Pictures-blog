@@ -1,0 +1,56 @@
+
+      
+        <link rel="stylesheet" href="\static\css\bootstrap.min.css">
+        <link rel="stylesheet" href="\static\css\new.css">
+     
+        <nav class="navbar navbar-expand-lg navbar-light " style="background-color:  	#008000;" >
+            <div class="container-fluid">
+             
+               
+              </button>
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a style="display: inline-block" class="navbar-brand" href="#">
+                  <div class="titre">Lumière capturée </div></a>
+                
+                
+                <form class="d-flex input-group w-auto" action="{% url 'search' %}">
+                  <input
+                    type="search"
+                    class="form-control"
+                    placeholder="Type query"
+                    aria-label="Search"
+                    name="article"
+                    
+                  />
+                  <button
+                    class="btn btn-info"
+                    type="button"
+                    data-mdb-ripple-color="dark"
+                  >
+                    Search
+                  </button>
+                </form>
+                {% if user.is_authenticated %}
+                
+                <div style="position: relative;">
+                  <div style="position: absolute; top: -20px;; right: 0; transform: translateX(650px);">
+                    <a href="" class="btn btn-info">Deconnexion</a>
+                  </div>
+                </div>
+                
+
+                {% else %}
+
+                <div style="position: relative;">
+                  <div style="position: absolute; top: -20px;; right: 0; transform: translateX(650px);">
+                    <a href="{% url 'login-blog' %}" class="btn btn-info">Connexion</a>
+                  </div>
+                </div>
+                
+
+                {% endif %}
+               
+                
+              </div>
+            </div>
+          </nav>  
